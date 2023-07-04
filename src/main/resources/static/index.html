@@ -28,6 +28,11 @@ input {
     margin-top: 1em;
 }
 
+#fileContainer {
+  margin-bottom: 50px; /* Add larger bottom margin to create space for the footer */
+  overflow: auto;
+}
+
 .footer {
     background: rgb(148, 144, 144);
     text-align: center;
@@ -62,7 +67,7 @@ input {
     <script src="client.js"></script>
 
     <!--WebRTC related code-->
-
+    <div id="fileContainer"></div>
 </div>
 <div class="footer">This application is intentionally made simple
     to avoid cluttering with non WebRTC related code.</div>
