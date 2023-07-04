@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Install Java and Maven
+sudo yum update -y
+sudo yum install -y java-11-amazon-corretto-headless.x86_64
+sudo yum install -y maven
+
+# Clone Spring Boot project
+sudo yum install -y git
+git clone https://github.com/koushikruidas/webrtc.git
+
+# Build and run Spring Boot application
+cd webrtc
+
+# Build the application
+mvn clean package
+
+# Run the application with the environment variables
+java -jar target/webrtc-0.0.1-SNAPSHOT.jar

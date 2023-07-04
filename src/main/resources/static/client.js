@@ -125,3 +125,26 @@ function sendMessage() {
     dataChannel.send(input.value);
     input.value = "";
 }
+
+function sendFile() {
+  var fileInput = document.getElementById("fileInput");
+  var files = fileInput.files;
+
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    // Do something with the file, such as sending it over the data channel
+    // For example, you can use the FileReader API to read the file contents
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+      var fileData = event.target.result;
+      // Send the file data over the data channel
+      dataChannel.send(fileData);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  // Clear the file input
+  fileInput.value = "";
+}
