@@ -63,7 +63,8 @@ function initialize() {
 
     // when we receive a message from the other peer, printing it on the console
     dataChannel.onmessage = function(event) {
-        if (typeof event.data !== "string") {
+    debugger
+        if (isJSON(event.data)) {
             var receivedMessage = JSON.parse(event.data);
 
               // Check the message type
@@ -211,15 +212,11 @@ function getFileType(fileData) {
   return fileType;
 }
 
-function base64ToBlob(base64Data) {
-  var byteCharacters = atob(base64Data);
-  var byteArrays = [];
-
-  for (var i = 0; i < byteCharacters.length; i++) {
-    byteArrays.push(byteCharacters.charCodeAt(i));
+function isJSON(message) {
+  try {
+    JSON.parse(message);
+    return true;
+  } catch (error) {
+    return false;
   }
-
-  var byteArray = new Uint8Array(byteArrays);
-  return new Blob([byteArray], { type: "application/octet-stream" });
 }
-
