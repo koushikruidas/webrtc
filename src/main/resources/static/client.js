@@ -63,17 +63,20 @@ function initialize() {
 
     // when we receive a message from the other peer, printing it on the console
     dataChannel.onmessage = function(event) {
-        console.log("message:", event.data);
-        var receivedMessage = JSON.parse(event.data);
+        if (typeof event.data !== "string") {
+            var receivedMessage = JSON.parse(event.data);
 
-          // Check the message type
-          if (receivedMessage.type === 'file') {
-            var fileData = receivedMessage.data;
+              // Check the message type
+              if (receivedMessage.type === 'file') {
+                var fileData = receivedMessage.data;
 
-            // Handle the received file data
-            receiveFileData(fileData);
+                // Handle the received file data
+                receiveFileData(fileData);
+              } else {
+                    console.log("again printing the data in else: ",event.data)
+              }
           } else {
-                console.log("again printing the data in else: ",event.data)
+                console.log("message: ", event.data);
           }
 
     };
